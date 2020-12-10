@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://81.70.49.73:3306/micro_mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: mallUser
+    password: mallUser
+    hikari:
+       minimum-idle: 5
+       # 空闲连接存活最大时间，默认600000（10分钟）
+       idle-timeout: 180000
+       # 连接池最大连接数，默认是10
+       maximum-pool-size: 10
+       # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+       auto-commit: true
+       # 连接池名称
+       pool-name: MyHikariCP
+       # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+       max-lifetime: 1800000
+       # 数据库连接超时时间,默认30秒，即30000
+       connection-timeout: 30000
+       connection-test-query: SELECT 1
+    
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  #pojo类所在包路径
+  type-aliases-package: com.study.microsuser.model
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 返回map时true:当查询数据为空时字段返回为null,false:不加这个查询数据为空时，字段将被隐藏
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
